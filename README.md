@@ -8,8 +8,6 @@
 ### jQuery example
 ```js
 $(function (){
-  var info = $('.info');
-  
   $('#mailtip').mailtip({
     onSelected: function (mail){
       info.text('You choosed email: ' + mail)
@@ -28,7 +26,7 @@ You can set a custom domain list like this:
 ```
 
 ### Options
-- *mails*
+- *domains*
 > The email domain list.
 
 - *width*
@@ -42,6 +40,9 @@ You can set a custom domain list like this:
 
 - *offsetLeft*
 > The tooltip left offset if required, defaults to 0.
+
+- *offsetWidth*
+> The tooltip width offset when using `auto` width, to make manual adjustments if it doesn't fit your design well.
 
 - *zIndex*
 > The zIndex of the tooltip element, defaults to 10000.
