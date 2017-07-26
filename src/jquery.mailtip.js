@@ -3,13 +3,15 @@
  * Author: uniring
  * Original author: nuintun
  * $(selector).mailtip({
- *   mails: [], // Mail domains list as array of strings.
- *   onSelected： function(mail) {}, // On selected callback.
- *   width: 'auto', // Popup tip's width.
- *   offsetTop: -1, // Offset top relative default position.
- *   offsetLeft: 0, // Offset left relative default position.
- *   zIndex: 10 // Popup tip's z-index.
- *   disableAutocomplete: false // Allows autocomplete over this tooltip.
+ *   domains: [],                         // Mail domains list as array of strings.
+ *   onSelected: function(mail) {},     // On selected callback.
+ *   width: 'auto',                     // Popup tip's width.
+ *   offsetTop: -1,                     // Offset top relative default position.
+ *   offsetLeft: 0,                     // Offset left relative default position.
+ *   offsetWidth: 0,                    // Width offset if you need to do some manual adjustment.
+ *   zIndex: 10000,                     // Popup tip's z-index.
+ *   maximumVisibleOptions: 10,         // Maximum visible domain hints in the tooltip.
+ *   disableAutocomplete: false         // Allows autocomplete over this tooltip.
  * });
  */
 
@@ -99,7 +101,7 @@
         var input = tip.input;
         var config = tip.config;
         var offset = input.offset();
-        var calculatedWidth = input.outerWidth() - (tip.outerWidth() - tip.innerWidth()) + 1;
+        var calculatedWidth = input.outerWidth() + config.offsetWidth;
 
         // Calculate and apply position and size styles.
         tip.css({
@@ -134,8 +136,8 @@
         }
 
         var count = 0;
-        for (var i = 0, len = tip.config.mails.length; i < len; i++) {
-            mail = tip.config.mails[i];
+        for (var i = 0, len = tip.config.domains.length; i < len; i++) {
+            mail = tip.config.domains[i];
 
             if (hasAt && mail.indexOf(domain) !== 0) continue;
 
@@ -180,7 +182,6 @@
      *
      * @param tip
      * @param value
-     * @param mails
      */
     function toggleTip(tip, value) {
         var atIndex = value.indexOf('@');
@@ -194,7 +195,7 @@
         } else {
             var items = createItems(value, tip);
 
-            // If there's matching mails, show the tooltip.
+            // If there's matching domains, show the tooltip.
             if (items) {
                 positionTip(tip);
                 tip.html(items).show();
@@ -212,7 +213,7 @@
      */
     $.fn.mailtip = function (config) {
         var defaults = {
-            mails: [
+            domains: [
                 'gmail.com',
                 'hotmail.com',
                 'yahoo.com',
@@ -222,6 +223,7 @@
             width: 'auto',
             offsetTop: -1,
             offsetLeft: 0,
+            offsetWidth: 0,
             zIndex: 10000,
             maximumVisibleOptions: 10,
             disableAutocomplete: true
@@ -231,6 +233,7 @@
         config.zIndex = isNumber(config.zIndex) ? config.zIndex : defaults.zIndex;
         config.offsetTop = isNumber(config.offsetTop) ? config.offsetTop : defaults.offsetTop;
         config.offsetLeft = isNumber(config.offsetLeft) ? config.offsetLeft : defaults.offsetLeft;
+        config.offsetWidth = isNumber(config.offsetWidth) ? config.offsetWidth : defaults.offsetWidth;
         config.onSelected = $.isFunction(config.onSelected) ? config.onSelected : defaults.onSelected;
         config.width = config.width === 'input' || isNumber(config.width) ? config.width : defaults.width;
 
