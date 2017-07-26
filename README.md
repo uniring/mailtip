@@ -1,6 +1,8 @@
 # Mailtip
 
-> A jQuery email autocomplete plugin. AngularJS wrapper available.
+> A jQuery email domain autocomplete plugin. This plugin suggests email domains in a dropdown while the user is typing his email so he can select it from the dropdown to improve writring speed and UX.
+
+> An AngularJS wrapper (still requires jQuery) is optionally available, just include the js file, load the `mailtip` module in your AngularJS app and add the `mailtip` attribute to your email fields. You can change Mailtip configurations using the config provider too, see the example below.
 
 ### Required
 > jQuery >= 1.7
