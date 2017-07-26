@@ -5,6 +5,11 @@
 ### Required
 > jQuery >= 1.7
 
+
+### Live Demo
+[Click here see the live demo in jQuery](https://uniring.github.io/mailtip/mailtip.html)  
+[Click here see the live demo in AngularJS](https://uniring.github.io/mailtip/mailtip-angular.html)
+
 ### jQuery example
 ```js
 $(function (){
@@ -23,6 +28,21 @@ $(function (){
 You can set a custom domain list like this:
 ```html
 <input type="email" mailtip mailtip-domains="gmail.com,hotmail.com,yahoo.com">
+```
+Or you can use the provider to set a list of domains globally so your HTML code ends cleaner:
+```
+angular.module('yourApp', ['mailtip'])
+  .config(function (mailtipConfigProvider) {
+    mailtipConfigProvider.set('domains', [
+      'gmail.com',
+      'hotmail.com',
+      'aol.com',
+      'msn.com',
+      'outlook.com',
+      'icloud.com',
+      'live.com'
+    ]);
+  });
 ```
 
 ### Options
@@ -52,7 +72,3 @@ You can set a custom domain list like this:
 
 - *disableAutocomplete*
 > Disable the browser's autocomplete funcionality, defaults to true.
-
-
-### Live Demo
-[Click here see the live demo](https://uniring.github.io/mailtip/mailtip.html)
