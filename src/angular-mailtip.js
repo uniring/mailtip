@@ -6,15 +6,23 @@ angular.module('mailtip', [])
                 domains: "@mailtipDomains"
             },
             link: function(scope, element) {
-                // Trigger field 'change' event when the user selects an option.
-                var config = {
-                    onSelected: function() {
-                        element.change();
-                    }
-                };
-
                 // Apply config provider configuration.
-                angular.extend(config, mailtipConfig.getAll());
+                var config = mailtipConfig.getAll();
+
+                // Find if loaded config has an onSelected callback and save it.
+                var onSelectedCallback = false;
+                if (typeof config.onSelected == 'function') {
+                    onSelectedCallback = config.onSelected;
+                }
+
+                // Redefine onSelected callback to add needed logic to it before the actual user's callback.
+                config.onSelected = function() {
+                    // Trigger field 'change' event when the user selects an option.
+                    element.change();
+                    if (onSelectedCallback) {
+                        onSelectedCallback();
+                    }
+                }
 
                 // If mailtip-domains attribute has values, override domains config with them.
                 if (scope.domains && scope.domains.split(',').length > 0) {
