@@ -1,4 +1,4 @@
-# Mailtip
+# Mailtip 2
 
 > A jQuery email domain autocomplete plugin. This plugin suggests email domains in a dropdown while the user is typing his email so he can select it from the dropdown to improve writring speed and UX.
 
