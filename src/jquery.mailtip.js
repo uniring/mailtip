@@ -18,11 +18,11 @@
 'use strict';
 
 (function ($) {
-    // invalid email char test regexp
+    // Invalid email regex.
     var INVALIDEMAILRE = /[^\u4e00-\u9fa5_a-zA-Z0-9]/;
-    // is support oninput event
+    // Check if browser supports oninput event.
     var hasInputEvent = 'oninput' in document.createElement('input');
-    // is ie 9
+    // Check if browser is IE9.
     var ISIE9 = /MSIE 9.0/i.test(window.navigator.appVersion || window.navigator.userAgent);
 
     /**
